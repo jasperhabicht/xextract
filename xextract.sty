@@ -21,6 +21,7 @@
 \tl_new:N \g__xextract_label_tl
 \tl_new:N \l__xextract_extract_tl
 
+% create most important keys
 \keys_define:nn { xextract } {
     active          .bool_set:N  = \l__xextract_active_bool ,
     active          .default:n   = { true } ,
@@ -42,8 +43,8 @@
 
 \ProcessKeyOptions [ xextract ]
 
+% write environment to external fllw
 \cs_new_protected:Npn \__xextract_extract_env_aux:nn #1#2 {
-    \iow_now:Nn \l__xextract_iow {  }
     \group_begin:
         \tl_set:Nn \l__xextract_extract_tl {#2}
         \tl_replace_all:Nen \l__xextract_extract_tl {
@@ -60,6 +61,7 @@
     \iow_now:Nn \l__xextract_iow \l__xextract_extract_tl
 }
 
+% decide whether to extract environmwnr
 \cs_new_protected:Npn \__xextract_extract_env:nn #1#2 {
     \bool_lazy_and:nnTF {
         \clist_if_exist_p:c { l__xextract_ #1 _labels_clist }
@@ -77,10 +79,12 @@
     }
 }
 
+% construct \end{verbatim} with verbatim catcodes
 \tl_const:Ne \c__xextract_verbatim_end_tl {
     \c_backslash_str end \c_left_brace_str verbatim \c_right_brace_str
 }
 
+% replacement for verbatim environment
 \exp_last_unbraced:NNNNo
     \cs_new_protected:Npn \__xextract_verbatim:w #1 \c__xextract_verbatim_end_tl {
         #1
@@ -89,6 +93,8 @@
         \tl_gclear:N \g__xextract_label_tl
     }
 
+% better approach would probably to use hooks, but this does not work easily
+% another approach could be to always grab the environment verbatim (this is how the original package solves this)
 \cs_new_protected:Npn \__xextract_collect_env:n #1 {
     \cs_set_eq:cc { __xextract_ #1 _copy_begin: } {#1}
     \cs_set_eq:cc { __xextract_ #1 _copy_end: } { end #1 }
