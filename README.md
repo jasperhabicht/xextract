@@ -2,7 +2,9 @@
 
 # The `xextract` package
 
-The `xextract` package is an experimental rewrite of the `extract` package.
+The `xextract` package is an experimental rewrite of the `extract` package (https://ctan.org/pkg/extract).
+
+As of currently, it only provides basic functionality of the `extract` package.
 
 ---
 
