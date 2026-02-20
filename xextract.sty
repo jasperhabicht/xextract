@@ -86,6 +86,7 @@
         #1
         \end { verbatim }
         \__xextract_extract_env:nn { verbatim } {#1}
+        \tl_gclear:N \g__xextract_label_tl
     }
 
 \cs_new_protected:Npn \__xextract_collect_env:n #1 {
