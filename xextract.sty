@@ -77,12 +77,6 @@
     }
 }
 
-\cctab_const:Nn \c__xextract_verbatim_cctab {
-    \int_step_inline:nnn { 0 } { 127 }
-      { \char_set_catcode_other:n {#1} }
-    \int_set:Nn \tex_endlinechar:D { 10 }
-}
-
 \tl_const:Ne \c__xextract_verbatim_end_tl {
     \c_backslash_str end \c_left_brace_str verbatim \c_right_brace_str
 }
