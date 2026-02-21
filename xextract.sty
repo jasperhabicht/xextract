@@ -43,7 +43,7 @@
 
 \ProcessKeyOptions [ xextract ]
 
-% write environment to external fllw
+% write environment to external flle
 \cs_new_protected:Npn \__xextract_extract_env_aux:nn #1#2 {
     \group_begin:
         \tl_set:Nn \l__xextract_extract_tl {#2}
@@ -61,7 +61,7 @@
     \iow_now:Nn \l__xextract_iow \l__xextract_extract_tl
 }
 
-% decide whether to extract environmwnr
+% decide whether to extract environment
 \cs_new_protected:Npn \__xextract_extract_env:nn #1#2 {
     \bool_lazy_and:nnTF {
         \clist_if_exist_p:c { l__xextract_ #1 _labels_clist }
@@ -71,7 +71,7 @@
         }
     } {
         \clist_if_in:cVT { l__xextract_ #1 _labels_clist }
-            \g__xextract_label_tl { 
+            \g__xextract_label_tl {
                 \__xextract_extract_env_aux:nn {#1} {#2}
             }
     } {
@@ -107,7 +107,7 @@
             \use:c { __xextract_ #1 _copy_begin: }
             ##1
             \use:c { __xextract_ #1 _copy_end: }
-        } { 
+        } {
             \tl_gclear:N \g__xextract_label_tl
         }
     }
@@ -117,8 +117,8 @@
     \clist_map_inline:Nn \l__xextract_extract_env_clist {
         \__xextract_collect_env:n {#1}
     }
-    \iow_open:Nn \l__xextract_iow { 
-        \l__xextract_file_str .tex 
+    \iow_open:Nn \l__xextract_iow {
+        \l__xextract_file_str .tex
     }
     \AddToHook { enddocument } {
         \iow_close:N \l__xextract_iow
